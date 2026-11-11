@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DSA Fresher Interview Guide + Tracker</title>
+<style>
+:root{--bg:#faf9f6;--card:#fff;--tx:#1f1d1a;--mu:#6b665e;--bd:#e4e0d8;--ac:#2f6f5e;--ac2:#e3f1ec;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171614;--card:#201f1c;--tx:#ece8e0;--mu:#a09a8e;--bd:#33312c;--ac:#6fc2a8;--ac2:#1f3a32}}
+:root[data-theme="dark"]{--bg:#171614;--card:#201f1c;--tx:#ece8e0;--mu:#a09a8e;--bd:#33312c;--ac:#6fc2a8;--ac2:#1f3a32}
+html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:16px}
+h1{font-size:1.5rem;margin:8px 0 4px}
+.sub{color:var(--mu);margin:0 0 12px;font-size:.92rem}
+.top{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px 0 10px;z-index:5;border-bottom:1px solid var(--bd)}
+.bar{height:10px;background:var(--bd);border-radius:6px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--ac);transition:width .25s}
+.stat{display:flex;justify-content:space-between;font-size:.85rem;color:var(--mu);margin-top:6px;gap:8px;flex-wrap:wrap}
+button.reset{background:none;border:1px solid var(--bd);color:var(--mu);border-radius:6px;padding:2px 8px;font-size:.8rem;cursor:pointer}
+details{background:var(--card);border:1px solid var(--bd);border-radius:10px;margin:12px 0}
+summary{cursor:pointer;padding:12px 14px;font-weight:600;display:flex;justify-content:space-between;gap:8px;align-items:center;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary small{font-weight:500;color:var(--ac);background:var(--ac2);padding:2px 8px;border-radius:10px;white-space:nowrap}
+.note{padding:0 14px 8px;color:var(--mu);font-size:.88rem}
+.row{display:flex;gap:10px;padding:10px 14px;border-top:1px solid var(--bd);align-items:flex-start}
+.row input{width:20px;height:20px;margin-top:3px;accent-color:var(--ac);flex:none}
+.row .b{flex:1;min-width:0}
+.row .n{font-weight:600}
+.row.done .n{text-decoration:line-through;color:var(--mu)}
+.row .d{color:var(--mu);font-size:.9rem;margin:2px 0 6px}
+.lk a{display:inline-block;font-size:.82rem;text-decoration:none;border:1px solid var(--ac);color:var(--ac);padding:2px 10px;border-radius:14px;margin:0 6px 4px 0}
+.lk a:hover{background:var(--ac2)}
+.foot{color:var(--mu);font-size:.82rem;margin:20px 0}
+</style></head><body><div class="wrap">
+<h1>DSA Guide for Fresher Interviews</h1>
+<p class="sub">Beginner to intermediate. Work top to bottom: watch the video, solve the practice problem, then tick the box. Progress is saved in this browser.</p>
+<div class="top"><div class="bar"><i id="pb"></i></div>
+<div class="stat"><span id="pt">0 of 0 done</span><button class="reset" id="rs">Reset all</button></div></div>
+<div id="app"></div>
+<p class="foot">Video buttons open a YouTube search tuned to a specific channel (Striver, Apna College, NeetCode, etc.), so the top result is the right lesson. Practice buttons open the problem on LeetCode. Order of topics follows what fresher interviews ask most.</p>
+</div>
+<script>
+var D=[
+{t:"0. OOPs (start here)",n:"The first two topics are needed before Linked List and Trees. The rest are common interview questions, so cover them in parallel with DSA.",s:[
+["Classes and objects (including a Node class)","Write a class, create objects, store data in fields. You will write Node classes for linked lists and trees.","Apna College OOPs classes and objects",""],
+["Constructors and the this keyword","How objects get their starting values and how an object refers to itself.","Apna College OOPs constructors this keyword",""],
+["Encapsulation","Bundle data and methods together and hide data using private fields and getters/setters.","OOPs encapsulation explained with example",""],
+["Abstraction","Show only what is needed and hide the details. Know how it differs from encapsulation.","OOPs abstraction explained with example",""],
+["Inheritance","A child class reuses and extends a parent class.","OOPs inheritance explained with example",""],
+["Polymorphism (overloading vs overriding)","One name, many behaviours. A very common interview question.","OOPs polymorphism overloading overriding explained",""],
+["Common OOPs interview questions","Revise the four pillars and typical fresher questions before interviews.","OOPs interview questions and answers for freshers",""]]},
+{t:"1. Foundations",n:"Learn this first; every other topic uses it.",s:[
+["Time and space complexity (Big-O)","How to describe how fast and how memory-hungry your code is. Interviewers ask this on every solution.","Striver time and space complexity DSA",""],
+["Recursion basics","A function calling itself with a base case. The foundation for trees, backtracking and DP.","Striver recursion basics for beginners",""],
+["Basic math for DSA","GCD, prime check, digit manipulation, palindrome numbers.","Striver basic maths DSA gcd prime digits",""],
+["Hashing (HashMap / HashSet)","Store and look up data in O(1). Used in a huge number of interview problems.","Striver hashing theory map set",""]]},
+{t:"2. Arrays",n:"The most asked topic in fresher rounds.",s:[
+["Array basics and traversal","Declare, loop, find max/min, reverse, rotate.","Striver arrays easy problems","move-zeroes"],
+["Two pointers","Use two indexes moving through an array to avoid nested loops.","Striver two pointers technique","merge-sorted-array"],
+["Prefix sum and Kadane’s algorithm","Running sums and the maximum subarray sum trick.","Striver Kadane algorithm maximum subarray","maximum-subarray"],
+["Sliding window","A moving window over an array or string for subarray/substring problems.","Striver sliding window technique","best-time-to-buy-and-sell-stock"],
+["Sorting-based array problems","Dutch national flag, merge intervals style thinking.","Striver sort 0s 1s 2s Dutch national flag","sort-colors"]]},
+{t:"3. Strings",n:"Same ideas as arrays, plus character handling.",s:[
+["Palindrome and reversal","Check and reverse strings in place using two pointers.","Apna College strings palindrome reverse","valid-palindrome"],
+["Anagrams and frequency counting","Count characters with an array or HashMap.","NeetCode valid anagram","valid-anagram"],
+["Longest substring problems","Sliding window plus a set on strings.","NeetCode longest substring without repeating characters","longest-substring-without-repeating-characters"]]},
+{t:"4. Searching and Sorting",n:"Know the idea and complexity of each.",s:[
+["Binary search","Halve the search space each step on sorted data. Very common.","Striver binary search for beginners","binary-search"],
+["Bubble, selection and insertion sort","Simple O(n²) sorts. Be able to explain and code them.","Striver sorting bubble selection insertion","sort-colors"],
+["Merge sort","Divide and conquer, O(n log n). Great for explaining recursion.","Striver merge sort","merge-sorted-array"],
+["Quick sort","Pick a pivot, partition, recurse. Know the worst case.","Striver quick sort","sort-colors"]]},
+{t:"5. Linked List",n:"Pointer-heavy. Draw it on paper while solving.",s:[
+["Singly linked list basics","Node structure, insert, delete, traverse.","Striver linked list introduction insert delete","reverse-linked-list"],
+["Reverse a linked list","Iterative with three pointers. Asked constantly.","Striver reverse linked list","reverse-linked-list"],
+["Fast and slow pointers","Find the middle node and detect a cycle.","Striver linked list cycle middle slow fast pointer","linked-list-cycle"],
+["Merge two sorted lists","Combine lists with a dummy node.","Striver merge two sorted linked lists","merge-two-sorted-lists"],
+["Doubly linked list","Prev and next pointers; insert and delete both ends.","Striver doubly linked list",""]]},
+{t:"6. Stack and Queue",n:"Simple structures, very common in screening rounds.",s:[
+["Stack and queue basics","LIFO vs FIFO, implement with array or linked list.","Striver stack and queue implementation","implement-queue-using-stacks"],
+["Valid parentheses","Classic stack problem. Almost guaranteed in some form.","NeetCode valid parentheses","valid-parentheses"],
+["Next greater element","Monotonic stack idea, one step above basics.","Striver next greater element monotonic stack","next-greater-element-i"]]},
+{t:"7. Hashing Problems",n:"Apply the HashMap you learned in Foundations.",s:[
+["Two Sum","Store seen values in a map. The most famous interview problem.","NeetCode two sum","two-sum"],
+["Contains duplicate and frequency problems","Use HashSet and counts to cut brute force.","NeetCode contains duplicate","contains-duplicate"],
+["Longest consecutive sequence","HashSet trick to get O(n).","Striver longest consecutive sequence","longest-consecutive-sequence"]]},
+{t:"8. Recursion and Backtracking",n:"Intermediate. Try all choices, undo, try the next.",s:[
+["Subsets","Include or exclude each element.","Striver recursion subsequences subsets","subsets"],
+["Permutations","Build every ordering with a visited array.","Striver permutations recursion","permutations"],
+["N-Queens (optional stretch)","The standard backtracking showpiece.","Striver N Queens backtracking","n-queens"]]},
+{t:"9. Trees",n:"Binary tree plus BST. Most are recursion in disguise.",s:[
+["Tree basics and traversals","Inorder, preorder, postorder, recursive and iterative.","Striver binary tree traversals","binary-tree-inorder-traversal"],
+["Level order traversal (BFS)","Visit a tree level by level with a queue.","Striver level order traversal","binary-tree-level-order-traversal"],
+["Height and diameter","Max depth and longest path using recursion.","Striver maximum depth diameter binary tree","diameter-of-binary-tree"],
+["Binary Search Tree","Search, insert, validate a BST.","Striver binary search tree introduction","validate-binary-search-tree"]]},
+{t:"10. Heap / Priority Queue",n:"Short topic with a few repeat questions.",s:[
+["Heap basics","Min heap, max heap, push, pop, priority queue in your language.","Striver heap priority queue introduction",""],
+["Kth largest element","Keep a heap of size k.","NeetCode kth largest element in an array","kth-largest-element-in-an-array"]]},
+{t:"11. Graphs (intro level)",n:"Only the basics a fresher needs.",s:[
+["Graph representation, BFS and DFS","Adjacency list, traversal with a queue and recursion.","Striver graph BFS DFS traversal","number-of-islands"],
+["Number of islands","Grid DFS or BFS. A top graph interview question.","NeetCode number of islands","number-of-islands"],
+["Topological sort (stretch)","Order tasks with dependencies.","Striver topological sort course schedule","course-schedule"]]},
+{t:"12. Dynamic Programming (basics)",n:"Only the starter patterns. Do not go deeper for freshers.",s:[
+["Intro to DP, Fibonacci, climbing stairs","Memoization and tabulation on the simplest problems.","Striver dynamic programming introduction","climbing-stairs"],
+["1D DP: house robber","Pick or skip pattern.","Striver DP house robber maximum sum non adjacent","house-robber"],
+["Coin change and knapsack basics","Classic choose-or-not DP.","Striver DP coin change knapsack","coin-change"],
+["Longest common subsequence","The standard 2D DP example.","Striver longest common subsequence DP","longest-common-subsequence"]]},
+{t:"13. Final Project: Full Stack App for Your Resume",n:"Do this after the basics above. Pick one video, code along, then add your own feature so it is not a copy.",f:1,s:[
+["Watch and build: Dave Gray, MERN Stack Project (beginner friendly, step by step)","Covers frontend vs backend, Node, Express, MongoDB, React, auth. Follow along and code every part.","","","https://classcentral.com/classroom/youtube-mern-stack-project-fullstack-tutorial-132686","Dave Gray playlist"],
+["Longer option: Dave Gray, MERN Full Tutorial and Project (about 8 hours)","Deeper: middleware, controllers, Redux, authentication vs authorization.","","","https://classcentral.com/classroom/youtube-mern-stack-full-tutorial-project-complete-all-in-one-course-8-hours-132670","8-hour course"],
+["Alternative: JavaScript Mastery, Full Stack MERN Project, Build and Deploy","Builds a full app with React, Redux, Node, Express, MongoDB, then deploys it.","","","https://www.classcentral.com/course/youtube-full-stack-mern-project-build-and-deploy-an-app-react-redux-node-express-mongodb-part-1-2-121285","JS Mastery course"],
+["Add one feature of your own and deploy it live","Add something personal (search, filters, roles). Deploy and put the live link and GitHub repo on your resume.","MERN project deployment Render Vercel tutorial","" ]]}
+];
+var K="dsa_tracker_v1",st={};
+try{st=JSON.parse(localStorage.getItem(K)||"{}")}catch(e){st={}}
+function save(){try{localStorage.setItem(K,JSON.stringify(st))}catch(e){}}
+var app=document.getElementById("app"),html="";
+D.forEach(function(g,gi){
+html+='<details'+(gi<1?' open':'')+'><summary><span>'+g.t+'</span><small id="c'+gi+'"></small></summary><div class="note">'+g.n+'</div>';
+g.s.forEach(function(x,si){
+var id=gi+"-"+si,l="";
+if(x[4])l+='<a href="'+x[4]+'" target="_blank" rel="noopener">▶ '+(x[5]||"Watch")+'</a>';
+if(x[2])l+='<a href="https://www.youtube.com/results?search_query='+encodeURIComponent(x[2])+'" target="_blank" rel="noopener">▶ Watch</a>';
+if(x[3])l+='<a href="https://leetcode.com/problems/'+x[3]+'/" target="_blank" rel="noopener">✎ Practice</a>';
+html+='<div class="row" id="r'+id+'"><input type="checkbox" data-id="'+id+'" data-g="'+gi+'" aria-label="Mark done"><div class="b"><div class="n">'+x[0]+'</div><div class="d">'+x[1]+'</div><div class="lk">'+l+'</div></div></div>';
+});
+html+='</details>';
+});
+app.innerHTML=html;
+function upd(){
+var tot=0,dn=0;
+D.forEach(function(g,gi){var d=0;g.s.forEach(function(x,si){var id=gi+"-"+si;tot++;if(st[id]){dn++;d++}});
+document.getElementById("c"+gi).textContent=d+"/"+g.s.length});
+document.getElementById("pb").style.width=(tot?dn/tot*100:0)+"%";
+document.getElementById("pt").textContent=dn+" of "+tot+" done ("+Math.round(tot?dn/tot*100:0)+"%)";
+}
+document.querySelectorAll("input[data-id]").forEach(function(c){
+var id=c.getAttribute("data-id");c.checked=!!st[id];
+document.getElementById("r"+id).classList.toggle("done",c.checked);
+c.addEventListener("change",function(){
+if(c.checked)st[id]=1;else delete st[id];
+document.getElementById("r"+id).classList.toggle("done",c.checked);save();upd();});
+});
+document.getElementById("rs").onclick=function(){
+if(!confirm("Clear all progress?"))return;st={};save();
+document.querySelectorAll("input[data-id]").forEach(function(c){c.checked=false;document.getElementById("r"+c.getAttribute("data-id")).classList.remove("done")});upd();};
+upd();
+</script></body></html>
